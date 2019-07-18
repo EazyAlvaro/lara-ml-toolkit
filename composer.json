@@ -1,0 +1,29 @@
+{
+  "name": "EazyAlvaro/lara-ml-toolkit",
+  "type": "library",
+  "description": "Export Eloquent entities to arrays and CSV's for use in ML",
+  "keywords": [
+    "machine learning",
+    "ML",
+    "laravel"
+  ],
+  "require": {
+    "laravel/framework": "5.8.*",
+    "php-ai/php-ml": "dev-master"
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "LaraMlToolkit\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  }
+}
