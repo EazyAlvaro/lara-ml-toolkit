@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Phpml\Dataset\ArrayDataset;
 use Phpml\Exception\InvalidArgumentException;
 use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class MlExportService
 {
@@ -16,6 +17,9 @@ class MlExportService
 	 */
 	public static function toArrayDataset(Collection $data): ?ArrayDataset
 	{
+		$samples = [];
+		$labels = [];
+
 		self::collectSamplesAndLabels($data, $samples, $labels);
 
 		try {
@@ -42,7 +46,7 @@ class MlExportService
 	{
 		if ($data->isEmpty() || empty($data->first()->getMlFeatures())) {
 			$errMsg = "Provided dataset is empty or Model has no features/labels defined";
-			throw new \InvalidArgumentException($errMsg);
+			throw new InvalidArgumentException($errMsg);
 		}
 
 		$fields = [];
@@ -74,7 +78,9 @@ class MlExportService
 
 		foreach ($rows as $key => $row) {
 			if (fputcsv($fakeFile, $row) === false) {
+				// @codeCoverageIgnoreStart
 				throw  new \Exception("Failed to write CSV line/row " . $key);
+				// @codeCoverageIgnoreEnd
 			}
 		}
 		rewind($fakeFile);
@@ -85,6 +91,8 @@ class MlExportService
 
 	/**
 	 * @param string $filepath
+	 *
+	 * @codeCoverageIgnore only executes a framework function
 	 *
 	 * @return bool whether the file could be saved (exists)
 	 */

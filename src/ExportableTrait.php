@@ -17,7 +17,9 @@ trait ExportableTrait
 		return (new Collection($this->toArray()))
 			->map(function ($attribute, $key) {
 				return in_array($key, $this->getMlFeatures()) ? $attribute : null;
-			})->filter()->toArray();
+			})
+			//->filter() debatable whether we want this
+			->toArray();
 	}
 
 }
