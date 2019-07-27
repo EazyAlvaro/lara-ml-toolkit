@@ -10,6 +10,16 @@ class MockableModel extends Model implements MlExportable
 
 	private $target = 'testtarget';
 
+	protected $fillable = [
+		'feature1',
+		'feature2',
+		'target'
+	];
+
+	protected $hidden = [
+		'target'
+	];
+
 	/**
 	 * reminder: these are the headers for the features
 	 */
