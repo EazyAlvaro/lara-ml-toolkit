@@ -7,7 +7,6 @@ use Phpml\ModelManager;
 use Illuminate\Support\Collection;
 use LaraMlToolkit\MlExportService;
 use Phpml\Estimator;
-use Phpml\Dataset\ArrayDataset;
 use Phpml\Classification\Classifier;
 
 /**
